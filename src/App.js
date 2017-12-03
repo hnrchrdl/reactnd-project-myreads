@@ -22,17 +22,23 @@ class BooksApp extends React.Component {
     ]
   }
 
-  componentDidMount() {
-
-    /**
-     * When component got mounted
-     * fetch all the current books from the API
-     * and set them to the component's state
-     */
+  componentDidMount() {    
     BooksAPI.getAll().then(books => {
       console.log(books)
       this.setState({ books })
     });
+  }
+
+  /**
+   * Updates the Book's Status
+   * @param {string} bookId: The Book's Id
+   * @param {string} shelfId: The Shelf's Id
+   */
+  updateBookStatus = (bookId, shelfId) => {
+    this.setState(state => shelfId ?
+      { books: state.books.map(book => (book.id === bookId ? { ...book, shelf: shelfId } : book))} :
+      { books: state.books.filter(book => book.id !== bookId )}
+    );
   }
 
   render() {
@@ -70,6 +76,7 @@ class BooksApp extends React.Component {
                     key={shelf.id}
                     title={shelf.title}
                     books={this.state.books.filter(book => book.shelf === shelf.id)}
+                    onBookUpdate={this.updateBookStatus}
                   />
                 ))}
             </div>
