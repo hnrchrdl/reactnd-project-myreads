@@ -1,0 +1,43 @@
+import React, { Component } from 'react';
+
+import BookList from './BookList';
+import Header from './Header';
+import { Link } from 'react-router-dom';
+
+class Search extends Component {
+    
+    valueChange = (e) => {
+        this.props.onSearchTermChange(e.target.value);
+    }
+
+    render() {
+        return (
+            <div>
+                <Header/>
+                <div className="search-books">
+                    <div className="search-books-bar">
+                        <Link className="close-search" to="/">Close</Link>
+                        <div className="search-books-input-wrapper">
+                            {/*
+                            NOTES: The search from BooksAPI is limited to a particular set of search terms.
+                            You can find these search terms here:
+                            https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
+                            
+                            However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
+                            you don't find a specific author or title. Every search is limited by search terms.
+                            */}
+                            <input type="text" onChange={this.valueChange} placeholder="Search by title or author"/>
+    
+                        </div>
+                    </div>
+                    <div className="search-books-results">
+                    <BookList books={this.props.results} onBookUpdate={this.props.onBookUpdate}/>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+}
+
+export default Search;
