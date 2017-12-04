@@ -39,6 +39,8 @@ class BooksApp extends React.Component {
       { books: state.books.map(book => (book.id === bookId ? { ...book, shelf: shelfId } : book))} :
       { books: state.books.filter(book => book.id !== bookId )}
     );
+    console.log(shelfId)
+    BooksAPI.update({ id: bookId }, shelfId || 'none' );
   }
 
   render() {

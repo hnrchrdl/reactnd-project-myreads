@@ -10,17 +10,20 @@ const bookOptions = [
 
 function Book(props) {
     return (
+        
         <li>
+            {props.shelf}
             <div className="book">
                 <div className="book-top">
                     <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url('${props.imageLinks.thumbnail}')` }}></div>
                     <div className="book-shelf-changer">
-                    <select>
+                    <select defaultValue={props.shelf}>
                         {bookOptions.map(o => (
                             <option
                                 key={o.id}
-                                value={o.value} 
-                                onClick={() => props.onBookUpdate(props.id, o.value)}>
+                                value={o.value}
+                                onClick={() => props.onBookUpdate(props.id, o.value)}
+                                disabled={o.disabled}>
                                 {o.text}
                             </option>
                         ))}
@@ -34,4 +37,4 @@ function Book(props) {
     );
 }
 
-export default Book;
+export default Book
