@@ -76,7 +76,6 @@ class BooksApp extends React.Component {
       this.setState({ searchResults: []})
     } else {
       BooksAPI.search(searchTerm).then((result) => {
-        console.log(result)
         this.setState({
           searchResults: Array.isArray(result) ? result : []
         });
