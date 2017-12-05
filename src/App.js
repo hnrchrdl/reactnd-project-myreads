@@ -9,6 +9,10 @@ import Header from './Header';
 import React from 'react';
 import Search from './Search';
 
+const ls = require('local-storage');
+
+const LS_SEARCHTERM = 'myreads_search'
+
 function sortBy(prop) {
   return (a, b) => {
     var x = a[prop].toLowerCase();
@@ -36,7 +40,7 @@ class BooksApp extends React.Component {
       { id: 'wantToRead', title: 'Want to Read'},
       { id: 'read', title: 'Read'}
     ],
-    searchTerm: '',
+    searchTerm: ls(LS_SEARCHTERM) || '', // try to read from localstorage
     searchResults: []
   }
 
@@ -72,7 +76,7 @@ class BooksApp extends React.Component {
       searchTerm
     });
 
-    if(!searchTerm || searchTerm.length < 1) {
+    if(!searchTerm) {
       this.setState({ searchResults: []})
     } else {
       BooksAPI.search(searchTerm).then((result) => {
@@ -80,11 +84,24 @@ class BooksApp extends React.Component {
           searchResults: Array.isArray(result) ? result : []
         });
       });
+
     }
+    
+    // save to localstorage
+    ls(LS_SEARCHTERM, searchTerm);
   }
 
   componentDidMount() {
+    
+    // Update Book List on App Start
     this.updateBookList();
+
+    // update search
+    const search = this.state.searchTerm;
+    if(search) {
+      this.searchBooks(search);
+    }
+    
   }
 
   render() {
