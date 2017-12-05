@@ -9,7 +9,7 @@ const bookOptions = [
 ];
 
 class Book extends Component {
-    
+
     bookOptionChanged = (e) => {
         const shelfId = e.target.value;
         const bookId = this.props.id;
@@ -18,6 +18,14 @@ class Book extends Component {
     
     render() {
 
+        // set sensible default props
+        this.props = {
+            ...this.props,
+            title: this.props.title || 'No title',
+            imageLinks: this.props.imageLinks || {},
+            shelf: this.props.shelf || 'none',
+            authors: this.props.authors || ['Anonymous']
+        }
 
         return (
             <li>
@@ -30,10 +38,7 @@ class Book extends Component {
                         <div className="book-shelf-changer">
                         <select value={this.props.shelf || 'none'} onChange={this.bookOptionChanged}>
                             {bookOptions.map(o => (
-                                <option
-                                    key={o.id}
-                                    value={o.value}
-                                    disabled={o.disabled}>
+                                <option key={o.id} value={o.value} disabled={o.disabled}>
                                     {o.text}
                                 </option>
                             ))}

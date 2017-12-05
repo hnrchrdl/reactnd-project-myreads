@@ -21,9 +21,7 @@ function mapSearchResultsToBooks(books) {
   return (item) => {
     const book = books.find(b => b.id === item.id);
     if(book) {
-      item.shelf = book.shelf;
-    } else {
-      item.shelf = 'none';
+      return { ...item, shelf: book.shelf };
     }
     return item;
   }
