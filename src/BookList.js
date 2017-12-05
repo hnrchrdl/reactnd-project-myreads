@@ -4,7 +4,7 @@ import React from 'react';
 function BookList(props) {
 
     // set sensible default props
-    props = { ... props, books: props.books || []}
+    props = { ...props, books: props.books || [] }
 
     return (
         <ol className="books-grid">

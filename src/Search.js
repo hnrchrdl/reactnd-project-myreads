@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import BookList from './BookList';
-import Header from './Header';
 import { Link } from 'react-router-dom';
 
 class Search extends Component {
@@ -25,7 +24,7 @@ class Search extends Component {
                             However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                             you don't find a specific author or title. Every search is limited by search terms.
                             */}
-                            <input type="text" name="search" defaultValue={this.props.searchTerm} 
+                            <input type="text" autoFocus name="search" defaultValue={this.props.searchTerm} 
                                     onChange={this.valueChange} placeholder="Search by title or author"/>
    
                         </div>

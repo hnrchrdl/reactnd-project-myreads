@@ -29,13 +29,14 @@ class Book extends Component {
 
         return (
             <li>
+                
                 <div className="book">
                     <div className="book-top">
                         <div className="book-cover" 
                             style={{ width: 128, height: 193, 
                                 backgroundImage: `url('${this.props.imageLinks.thumbnail}')` }}>
                         </div>
-                        <div className="book-shelf-changer">
+                        <div className={`book-shelf-changer ${this.props.shelf !== 'none' ? ' listed' : ''}`}>
                         <select value={this.props.shelf || 'none'} onChange={this.bookOptionChanged}>
                             {bookOptions.map(o => (
                                 <option key={o.id} value={o.value} disabled={o.disabled}>

@@ -42,7 +42,6 @@ class BooksApp extends React.Component {
 
   updateBookList() {
     BooksAPI.getAll().then(books => {
-      console.log(books)
       books = [...books].sort(sortBy('title'));
       this.setState({ books })
     });
